@@ -1,0 +1,41 @@
+body{
+    background-image: url("https://wallpaper.forfun.com/fetch/2d/2d76335932dd54bff7c2cdd31a57353f.jpeg");
+}
+.Button-Menu{
+    left: 2%;
+    width:55%;
+    height: 5%;
+    position: fixed;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+button[type="bMenu"]{
+    position: page;
+    left: 40%;
+    width: 200px;
+    padding: 10px;
+    background-color: #4C2C59;
+    color: #f3f1f1;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+button:hover {
+    background-color: #6A4F8C;
+    transform: scale(1.05);
+}
+input[type="search"]{
+    width: 400px;
+    padding: 10px;
+    background-color: #4C2C59;
+    color: #f3f1f1;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
