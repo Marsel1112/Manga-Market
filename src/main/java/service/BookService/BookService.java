@@ -1,31 +1,28 @@
 package service.BookService;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.book.BookDao;
 import entity.Book;
-import entity.User;
+
 import lombok.AllArgsConstructor;
+import service.Service;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class BookService {
+public class BookService implements Service {
+
     private final BookDao bookDao;
-    private final ObjectMapper objectMapper;
+
     public void saveBook(Map<String, Object> bookMap) throws IOException {
         bookDao.saveBook(insertBook(bookMap));
     }
     public String getAllBooks(UUID userId) throws IOException {
-        return convertToJSON(bookDao.getAllBooks().stream()
-                                                    .filter(book -> book.getSellerID().equals(userId))
-                                                    .toList());
+        return bookDao.getAllBookFormatJSON(userId);
     }
     public String getAllBooks() throws IOException {
-        return convertToJSON(bookDao.getAllBooks());
+        return bookDao.getAllBookFormatJSON();
     }
     private Book insertBook(Map<String, Object> bookMap){
         return Book.builder()
@@ -37,9 +34,6 @@ public class BookService {
                 .sellerID((UUID) bookMap.get("userID"))
                 .url((String) bookMap.get("url"))
                 .build();
-    }
-    private String convertToJSON(List<Book> list) throws JsonProcessingException {
-        return  objectMapper.writeValueAsString(list);
     }
 
 }

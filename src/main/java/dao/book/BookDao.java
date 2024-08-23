@@ -1,26 +1,37 @@
 package dao.book;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dao.BaseDao;
 import entity.Book;
-import entity.User;
-import lombok.RequiredArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
-@RequiredArgsConstructor
-public class BookDao {
-    private final ObjectMapper objectMapper;
-    private final File file;
-    public void saveBook(Book book) throws IOException {
-        List<Book> books = getAllBooks();
-        books.add(book);
-        objectMapper.writeValue(file,books);
+
+public class BookDao extends BaseDao<Book> {
+
+    public BookDao(ObjectMapper objectMapper, File file, TypeReference<List<Book>> typeReference) {
+        super(objectMapper, file,typeReference);
     }
-    public List<Book> getAllBooks() throws IOException {
-        return objectMapper.readValue(file, new TypeReference<List<Book>>() {
-        });
+
+    public void saveBook(Book book) throws IOException {
+        List<Book> books = getAllEntity();
+        books.add(book);
+        writeToFile(books);
+    }
+    public List<Book> getAllBook() throws IOException {
+        return getAllEntity();
+    }
+    public String getAllBookFormatJSON() throws IOException {
+        return objectMapper.writeValueAsString(getAllBook());
+    }
+    public String getAllBookFormatJSON(UUID userId) throws IOException {
+        return objectMapper.writeValueAsString(getAllBook().stream()
+                .filter(n-> n.getSellerID().equals(userId))
+        );
     }
 }

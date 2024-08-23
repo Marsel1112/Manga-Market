@@ -1,9 +1,8 @@
-package servlets.BookEndPoints;
+package servlets.bookServlet;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import servlets.BaseServlet;
 
 import java.io.IOException;

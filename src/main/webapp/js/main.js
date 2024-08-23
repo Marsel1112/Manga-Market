@@ -2,7 +2,7 @@ function showForm(formType) {
     const formContainer = document.getElementById('form-container');
     let formHTML = '';
     if (formType === 'form1') {
-        fetch('/Market/main/library',{
+        fetch('/main/library',{
             method: 'GET'
         }).then(response => {
             if (!response.ok) {
@@ -12,7 +12,7 @@ function showForm(formType) {
         }).then(books => displayBooks(books)).catch(error => console.error('Ошибка:', error));
     }
     else if (formType === 'form2') {
-        fetch('/Market/main/book',{
+        fetch('/main/book',{
             method: 'GET'
         }).then(response => {
             if (!response.ok) {
@@ -23,7 +23,7 @@ function showForm(formType) {
     }
     else if (formType === 'form3') {
         formHTML = `
-                    <form class="form-container" id="form3" action="/Market/main/book" method="post">
+                    <form class="form-container" id="form3" action="/main/book" method="post">
                         <input type="text1" name="bookTitle" required placeholder="Введите название книги">
                         <input type="text2" name="bookGenre" required placeholder="Введите жанр книги">
                         <input type="text3" name="bookPrice" required placeholder="Цена книги">
